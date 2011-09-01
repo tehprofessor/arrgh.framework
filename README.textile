@@ -7,6 +7,10 @@ It'll receive updates as long as I feel the urge to continue learning php. If yo
 
 Both Smarty and phpActiveRecord are located in the views directory.
 
+h2. Status
+
+Pre-Alpha
+
 h2. Default Setup
 
 I would recommend just checking out the repo, and starting there!
@@ -69,7 +73,27 @@ their respective action with the following method: $this->view->set('var_name', 
 * Templates need to use the .tpl extension (Smarty)
 * Logic should not be performed in the template, it should be performed in the controller.
 
+h3. Thanks & Notes
+
+A few killer resources that helped me:
+
+*Big Thanks for this one*
+Write your own PHP MVC Framework (Part 1)
+http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/
+
+PHP Template Engine
+http://www.smarty.net/
+
+phpActiveRecord -- (currently down/dead? As such probably not the best ORM for this, but maybe I'll fork it... Use GoogleCache or archive.org to find Docs)
+http://www.phpactiverecord.org/ 
+
+4 awesome PHP functions you must use every time
+http://www.codeforest.net/4-awesome-php-functions-you-must-use-every-time
+
 h3. License
+
+phpActiveRecord, Smarty, and jQuery have their own respective licenses and owners, and are subject to them. The code specifically for this framework, not including modifications to Smarty or phpActiveRecord or jQuery, is licensed under the MIT License included below.
+
 
 Copyright (c) 2011 Servando Salazar
 

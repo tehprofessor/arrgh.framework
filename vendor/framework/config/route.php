@@ -46,7 +46,6 @@
 				}else{
 					$urlArray = explode("/", $this->path);					
 					if(array_key_exists(ucwords($urlArray[1]), $this->routes)){
-						echo "shit";
 					}
 				}
 				
