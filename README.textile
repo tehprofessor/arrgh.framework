@@ -1,0 +1,71 @@
+h1. ARRGH.framework
+
+ARRGH.framework is a dead-simple php MVC framework, that I built to get my hands dirty with some PHP. It currently has database support with phpActiveRecord, and template support
+with Smarty. It's mainly some routing functions and a dispatcher that calls the appropriate controller and action by convention rather than configuration. It should be rather easy to setup with other ORMs or templating engines.
+
+It'll receive updates as long as I feel the urge to continue learning php. If you're like, "WTF? Why would he..." the answer: php n00b. I usually program with Ruby ;)
+
+Both Smarty and phpActiveRecord are located in the views directory.
+
+h2. Default Setup
+
+I would recommend just checking out the repo, and starting there!
+
+h3. .htaccess
+
+* .htaccess in the root directory forwards to the public folder.
+* .htaccess in the public folder tells the application.php file to process the request UNLESS it matches a folder name.
+
+h3. Configuration
+
+* If you want to change the file structure, you'll need to modify: config/config.php
+* Database settings are also located in: config/config.php
+* All images, stylesheets, scripts, etc should be placed within the public folder.
+* NO HTML OR PHP FILES should go in the 'public' folder except application.php
+
+h3. Routing
+
+* I have included a demo routes file, in config/routes.php 
+* There are three class methods (Route::method)
+** root_to: this sets the default controller and action when someone accesses http://site.tld/
+** static_url: this is to route to a specific page
+** resource: this maps the default RESTFUL actions ('index','show','edit', 'destroy'), and delivers an id param to your controller if available
+*** index: http://site.tld/posts/ 
+*** edit: http://site.tld/posts/1/edit
+*** show: http://site.told/posts/1
+
+h3. Controllers
+
+* NAMING CONVENTION
+** Filename: pluralized_controller.php (e.g. posts_controller.php, users_controller.php)
+** Controller classnames: CamelCaseEachWord. Class UsersController {}; Class UserSessionsController {};
+** Controllers should extend the application controller
+* Put site-wide controller logic in application_controller.php
+* To load a page w/ the default controller, layout, and action: $this->view->render();
+* Example controller located at: app/controllers/posts_controller.php
+
+h3. Models
+
+* Models should be singular (e.g. user.php, post.php)
+* Model classes need to extend phpActiveRecord
+* See phpActiveRecord doc for more info
+* Tip: passing the phpActiveRecord Object to Smarty is a pain, this is how I do it (from the controller).
+
+$u = User::find(13);
+$u = $u->to_json(array('except' => 'password'));
+$u = json_decode($u);
+$this->view->set('user', $u);
+$this->view->render();
+
+* Example model located at: app/models/post.php
+
+
+h3. Views (Templates)
+
+* Templates work similarly to ruby on rails, with page templates in: app/views/layouts/ (where you put your HTML TAGS)
+* To pass variables from the controller to the template, you will need to assign them from
+their respective action with the following method: $this->view->set('var_name', $var) 
+* Template variables are Smarty variables, see Smarty doc to see how they work.
+* Templates need to use the .tpl extension (Smarty)
+* Logic should not be performed in the template, it should be performed in the controller.
+

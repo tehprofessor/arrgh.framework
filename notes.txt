@@ -1,0 +1,14 @@
+PHP NOTES:
+
+	ARRAY FUNCTIONS:
+		
+	array_push($new, $old)     
+		push type onto array
+	array_pop($array)      
+		pop last item off array
+	array_map($callback, $value_in_array)
+	     iterates each item in the array through the callback
+		 * To use a class method, you need to map it to an array:
+		array_map(array($this, 'method'), $value_in_array)
+	
+		
