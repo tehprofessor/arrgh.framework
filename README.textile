@@ -9,7 +9,7 @@ Both Smarty and phpActiveRecord are located in the views directory.
 
 h2. Status
 
-Pre-Alpha
+Pre-Alpha: Something might work, it might not work. This is more for to help others learning than for production (at least currently).
 
 h2. Default Setup
 
