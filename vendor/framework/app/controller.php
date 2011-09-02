@@ -1,14 +1,15 @@
 <?php
 
-class Controller extends Framework {
+class Controller extends Arrgh {
 	
 	protected $action;
 	protected $view;
 	protected $layout;
+	protected $params;
 
-	function __construct($_controller,$_action, $_layout = "default" ){
+	function __construct($_action, $_params, $_layout = "default" ){
+		$this->params = $_params;
 		$this->action = $_action;
-		$this->controller = $_controller;
 		$this->layout = $_layout;
 		$this->view = new View($_controller,$_action,$_layout);
 	}

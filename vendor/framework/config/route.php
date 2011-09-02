@@ -32,11 +32,12 @@
 		
 		public function resource($controller){
 			$restful = array("index","show","edit","destroy","update");
-			
+			$_controller = strtolower($controller);
 			foreach ($restful as $action){
-				$route = array("url" => $controller.DS.$action.DS,"controller" => $controller, "action" => $action, "params" => array("id" => ""));
+				$route = array("url" => $_controller.DS.$action.DS,"controller" => $controller, "action" => $action, "params" => array("id" => ""));
 				$this->routes['resources'][] = $route;
 			}			
+			$this->routes['resources'][] = array("url" => $_controller.DS, "controller" => $controller, "action" => "index", "params" => array()) ;
 		}
 		
 		private function get_routes(){
@@ -62,8 +63,8 @@
 		}
 		
 		protected function find_and_set_route(){
-			
-				if (strlen($this->path) <= 1){
+				$_path = $this->path;
+				if (strlen($_path) <= 1){
 					// if request is for root
 					$this->controller = $this->routes['root']['controller'];
 					$this->action = $this->routes['root']['action'];
@@ -71,16 +72,21 @@
 				}else{
 					// if url is specified by a static_url
 					foreach ($this->routes['static_urls'] as $route => $pieces){
-					
-						if(($this->path == $pieces['url']) || (substr($this->path, 0, -1) == $pieces['url'])){
-							$this->controller = $route['controller'];
-							$this->action = $route['action'];
-							$this->params = $route['params'];	
-						}else{
-							
+					// if the incoming url matches, the route, set and go...
+					// note: subtract one off the end of the url, incase the trailing slash is too much
+						if(($_path == $pieces['url']) || (substr($_path, 0, -1) == $pieces['url'])){
+							$this->controller = $pieces['controller'];
+							$this->action = $pieces['action'];
+							$this->params = $pieces['params'];								
 						}
 					}
-					
+					if(strlen($this->controller) <= 0){
+						$_url = $_path;
+						$_urlArray = explode("/", $_url);
+						if(count($_urlArray) <= 4){
+							 
+						}
+					}
 				}
 				
 				
