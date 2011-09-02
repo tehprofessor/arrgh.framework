@@ -19,16 +19,22 @@
 			$this->find_and_set_route();
 		}
 		
+		// create default route
+		
 		public function root_to($components){
 			$components = $this->verify_route($components);
 			$this->routes['root'] = $components;
 		}
+		
+		// create static routes
 		
 		public function static_url($components){
 			$components = $this->verify_route($components);
 			$this->routes['static_urls'][] = $components;
 			
 		}
+		
+		// create resource
 		
 		public function resource($controller){
 			$restful = array("index","show","edit","destroy","update");

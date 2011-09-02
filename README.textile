@@ -1,9 +1,9 @@
 h1. ARRGH.framework
 
-ARRGH.framework is a dead-simple php MVC framework, that I built to get my hands dirty with some PHP. It currently has database support with phpActiveRecord, and template support
+ARRGH.framework is a dead simple php MVC framework, that I built to get my hands dirty with some PHP. It currently has database support with phpActiveRecord, and template support
 with Smarty. It's mainly some routing functions and a dispatcher that calls the appropriate controller and action by convention rather than configuration. It should be rather easy to setup with other ORMs or templating engines.
 
-It'll receive updates as long as I feel the urge to continue learning php. If you're like, "WTF? Why would he..." the answer: php n00b. I usually program with Ruby ;)
+It'll receive updates as long as I feel the urge to continue learning php. If you're like, "WTF? Why would he..." the answer: php n00b. I usually program with Ruby ;) I'm going to try and setup the wiki as a tutorial. 
 
 Both Smarty and phpActiveRecord are located in the views directory.
 
@@ -12,6 +12,8 @@ h2. Status
 Pre-Alpha: Something might work, it might not work. This is more to help others learning, and myself, than for production (at least currently).
 
 h2. Default Setup
+
+REQUIRES: PHP 5.3
 
 I would recommend just checking out the repo, and starting there!
 
@@ -36,7 +38,7 @@ h3. Routing
 ** resource: this maps the default RESTFUL actions ('index','show','edit', 'destroy'), and delivers an id param to your controller if available
 *** index: http://site.tld/posts/ 
 *** edit: http://site.tld/posts/1/edit
-*** show: http://site.told/posts/1
+*** show: http://site.tld/posts/1
 
 h3. Controllers
 

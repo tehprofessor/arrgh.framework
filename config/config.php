@@ -24,6 +24,10 @@
 	/* 
 		DATABASE
 		If you need socket support (use one), edit: framework/app/model.php 
+		
+		My default (and thus the project default) uses MAMP and a database
+		named 'phptest'
+		
 	*/
 	
 	define('DB_NAME', 'phptest');
