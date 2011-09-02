@@ -1,39 +1,29 @@
 <?php
-class Framework {
+class Arrgh {
 		
 	private $route;
 	private $dispatch;
 	private $secure;
-	static $url;
-	static $get;
-	static $post;
-	static $cookie;
+	public $logger;
+	public $url;
+	public $get;
+	public $post;
+	public $cookie;
 	
 	public function __construct($url, $get, $post, $cookie){
+		$this->logger = new Logger();
 		$this->url = $url;
-		$secure = new Security($this->url, $get, $post, $cookie);
-		$this->get = $secure->get;
-		$this->post = $secure->post;
-		$this->cookie = $secure->cookie;
+		$this->get = $get;
+		$this->post = $post;
+		$this->cookie = $cookie;
 	}
 	
 	function start(){
-		
 		$routes = new Route($this->url);
-
+	//	$dispatch = new Dispatch($routes->create());
+		
 	}
 	
 }
-
-spl_autoload_register('application_autoload');
-
-function application_autoload($className) {
-		require_once(FRAMEWORK_CONFIG. strtolower($className).".php");
-		return false;
-}
-
-$framework = new Framework($url, $get, $post, $cookie);
-$framework->start();
-
 
 ?>

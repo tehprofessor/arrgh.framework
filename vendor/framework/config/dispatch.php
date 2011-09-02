@@ -1,27 +1,25 @@
 <?php
 	class Dispatch  {
 		
-		public $controller;
-		public $action;
-		public $params;
+		public static $controller;
+		public static $action;
+		public static $params;
 		
 		
-		function __construct($controller, $action = false, $params = false){
-			
-			if (!isset($action)){
-				$action = "index";
-			}
-			
-			$controller = new $controller($controller,$action, $param);	
-			
+		function __construct($args){
+			$this->controller = $args['controller'];
+			$this->action = $args['action'];
+			$this->params = $args['params'];
+			$controller = new $controller($action, $params);
 			if ((int)method_exists($controller, $action)) {
 				if(!isset($id)){
 					call_user_func_array(array($controller,$action),array($params));
 				}else{
-					call_user_func_array(array($controller,$action),array($id, $params));
+					call_user_func_array(array($controller,$action),array($params));
 				}
 			} else {
-				/* Error Generation Code Here */
+				echo "Controller or Method Does not exist!";
+				return false;
 			}
 		}
 	}

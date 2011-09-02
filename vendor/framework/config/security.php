@@ -2,11 +2,13 @@
 class Security {
 	
 	public $path;
-	static $get;
-	static $post;
-	static $cookie;
+	public $url;
+	public $get;
+	public $post;
+	public $cookie;
 	
 	function __construct($url, $get, $post, $cookie){
+		$this->url = $url;
 		$this->removeMagicQuotes($get, $post, $cookie);
 		$this->unregisterGlobals();
 	}

@@ -10,5 +10,6 @@
 	</head>
 	<body>
 		{include file="$yield"}
+		<p>Oy! It works.</p>
 	</body>
 </html>
