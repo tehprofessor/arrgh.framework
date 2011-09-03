@@ -1,5 +1,5 @@
 <?php
-	class Route extends Arrgh {
+	class Route {
 	
 		public $path;
 		public $controller;
@@ -147,8 +147,15 @@
 					if(strlen($this->controller) <= 0){
 						$_url = $_path;
 						$_urlArray = explode("/", $_url);
+						array_unshift($e)
 						if(count($_urlArray) <= 4){
-							 
+							 if(is_numeric($_urlArray[1])){
+								
+							}else{
+								
+							}
+						}else if(){
+							
 						}
 					}
 				}

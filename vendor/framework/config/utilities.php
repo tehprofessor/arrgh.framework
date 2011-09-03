@@ -1,6 +1,6 @@
 <?php
 
-	class Utilities extends Arrgh {
+	class Utilities {
 		
 	}
 
