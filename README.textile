@@ -22,6 +22,8 @@ h3. .htaccess
 * .htaccess in the root directory forwards to the public folder.
 * .htaccess in the public folder tells the application.php file to process the request UNLESS it matches a folder name.
 
+h3. Framework files located in: /vendor/framework
+
 h3. Configuration
 
 * If you want to change the file structure, you'll need to modify: config/config.php
