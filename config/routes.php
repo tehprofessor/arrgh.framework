@@ -46,11 +46,11 @@
 		
 		// Route a nested resource:
 		
-		$this->nested_resource(array("parent" => "ParentControllerName", 				// Parent resource (this is mostly used for creating the path)
-							   "resource" => "Posts", 							// Resource you're trying to setup
+		$this->nested_resource(array("parent" => "ParentControllerName", 		// Parent resource (this is mostly used for creating the path)
+							   "resource" => "ChildControllerName", 			// Resource you're trying to setup
 							   "allow_unnested_path" => true, 					// default true, sets up routes outside of the parent e.g. /categories/posts/ && /posts/
-							   "controller_override" => "",						// override default controller
-							   "action_override" => array(						// override restful actions
+							   "controller_override" => "",						// override default controller -- omit if not needed
+							   "action_override" => array(						// override restful actions -- omit if not needed
 									"index" => "viewall",
 									"show" => "view",
 									"edit" => "change",
@@ -58,21 +58,23 @@
 									"destroy" => "delete",
 									"new" => "new_post"
 								),					
-							   "parent_params" => array("title" => "posts"), 	// Parent parameters if needed
+							   "parent_params" => array("title" => ""), 	// key w/ empty value
 							   "params" => array()));							// child paramaters
 		
 		This will automatically setup the following paths and actions:
 		
 		index:
 			/child/
-			/parent/child/
+			/parent/$title/child/
 		show:
-			/controller/$id/show
-			/controller/$id
+			/child/:id
+			/parent/:title/child/:id
 		edit:
-			/controller/$id/edit
+			child/:id/edit
+			/parent/:title/child/:id/edit
 		new:
-			/controller/new
+			/child/new
+			/parent/:title/child/new
 		
 		note: create, update, and edit are coming soon, but I need to decide how to parse the form methods
 	*/
@@ -85,7 +87,7 @@
 	
 	$this->static_url(array("url" => "/about", "controller" => "Pages", "action" => "show", "params" => array("id" => 6)));
 	$this->resource("Categories");
-	$this->nested_resource("parent" => "Categories", "resource" => "Posts", "allow_unnested_path" => true, "parent_params" => array("category_id" => 3), "params" => array());
+	$this->nested_resource(array("parent" => "Categories", "resource" => "Posts", "parent_params" => array("category_id" => ""), "params" => array()));
 	
 	  
 

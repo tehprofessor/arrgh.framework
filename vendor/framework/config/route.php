@@ -37,18 +37,76 @@
 		// create resource
 		
 		public function resource($controller){
-			$restful = array("index","show","edit","destroy","update");
+			$restful = array("index","show","create","edit","destroy","update");
+			// lowercase controller name for paths, etc.
 			$_controller = strtolower($controller);
 			foreach ($restful as $action){
 				$route = array("url" => $_controller.DS.$action.DS,"controller" => $controller, "action" => $action, "params" => array("id" => ""));
 				$this->routes['resources'][] = $route;
 			}			
-			$this->routes['resources'][] = array("url" => $_controller.DS, "controller" => $controller, "action" => "index", "params" => array()) ;
+			$this->routes['resources'][] = array("url" => $_controller.DS, "controller" => $_controller, "action" => "index", "params" => array()) ;
+		}
+		
+		public function nested_resource($args){
+			if(!isset($args['allow_unnested_path'])){
+				$args['allow_unnested_path'] = true;
+			}
+			// setup vars
+			// $_controller is lowercase
+			
+			$controller = "";
+			$_controller = "";
+			$parent = array();
+			$compound_url = "";
+			// Check actions for override option and set them
+			
+			if(isset($args['action_override'])){
+				$restful = explode(",", implode(",", $a['action_override']));
+			}else{
+				$restful = array("index","show","create","edit","destroy","update");
+			}
+			
+			// Check for controller override and set it
+			
+			if(isset($args['controller_override'])){
+				$controller = $args['controller_override'];
+				$_controller = strtolower($controller);
+			}else{
+				$controller = $args['resource'];
+				$_controller = strtolower($controller);
+			}
+			
+			$parent['name'] = $args['parent'];
+			$parent['lower'] = strtolower($parent['name']);
+			
+			if(isset($args['parent_params'])){
+				$parent['params'] = $args['parent_params'];
+				$compound_url = "/".$parent['lower']."/".key($parent['params'])."/".$_controller."/";
+			}else{
+				$compound_url = "/".$parent['lower']."/".$controller."/";
+			}
+			
+			foreach ($restful as $action){
+				$route = array("url" => $compound_url.$action.DS, "controller" => $controller, "action" => $action, "parent_params" => $parent['params'], "params" => $args['params']);
+				$this->routes['nested_resource'][] = $route;
+			}
+			
+			$this->routes['nested_resource'][] = array("url" => $compound_url, "controller" => $_controller, "action" => $restful[0], "parent_params" => $parent['params'], "params" => $args['params']);
+			
+			if($args['allow_unnested_path'] === true){
+				$this->resource($controller);
+			}
+			
 		}
 		
 		private function get_routes(){
 			if(file_exists(ROUTES)){
 				require_once(ROUTES);
+			}
+			
+			foreach($this->routes as $route){
+				echo print_r($route);
+				echo "<br><br>";
 			}
 			
 		}
