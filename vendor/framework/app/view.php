@@ -2,7 +2,7 @@
 
 include(SMARTY_DIR . 'Smarty.class.php');
 
-class View extends Controller {
+class View {
 	
 	protected $smarty;
 	protected $variables = array();
