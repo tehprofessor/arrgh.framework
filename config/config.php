@@ -12,7 +12,7 @@
 	*/
 	
 	define('FRAMEWORK_ROOT', ROOT.DS."vendor".DS."framework".DS);
-	define('FRAMEWORK_CONFIG', FRAMEWORK_ROOT."config".DS);
+	define('FRAMEWORK_CORE', FRAMEWORK_ROOT."core".DS);
 	
 	/* 
 		Set development environment to true,

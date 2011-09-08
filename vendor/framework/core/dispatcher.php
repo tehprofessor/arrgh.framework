@@ -1,16 +1,13 @@
 <?php
-	class Dispatch  {
+	class Dispatcher  {
 		
-		public static $controller;
-		public static $action;
-		public static $params;
+		public $controller;
+		public $action;
+		public $params;
 		
 		
-		function __construct($args){
-			$this->controller = $args['controller'];
-			$this->action = $args['action'];
-			$this->params = $args['params'];
-			$controller = new $controller($action, $params);
+		function __construct($route){
+			$controller = new $route->controller($route->action, $route->params);
 			if ((int)method_exists($controller, $action)) {
 				if(!isset($id)){
 					call_user_func_array(array($controller,$action),array($params));

@@ -42,11 +42,11 @@
 		new:
 			/controller/new
 		
-		e.g. $this->resource("Posts")
+		e.g. $routes[] = array("type" => "resource", "posts")
 		
 		// Route a nested resource:
 		
-		$this->nested_resource(array("parent" => "ParentControllerName", 		// Parent resource (this is mostly used for creating the path)
+		$routes[] = (array("type" => "nested_resource", "parent" => "ParentControllerName", 		// Parent resource (this is mostly used for creating the path)
 							   "resource" => "ChildControllerName", 			// Resource you're trying to setup
 							   "allow_unnested_path" => true, 					// default true, sets up routes outside of the parent e.g. /categories/posts/ && /posts/
 							   "controller_override" => "",						// override default controller -- omit if not needed
@@ -79,15 +79,16 @@
 		note: create, update, and edit are coming soon, but I need to decide how to parse the form methods
 	*/
 	
-	$this->root_to(array("url" => "/", "controller" => "Posts", "action" => "index"));
-	  
+	$routes[] = array("type" => "root", "url" => "/", "controller" => "posts", "action" => "index");
+	      
+	      
+	$routes[] = array("type" => "static", "url" => "/login", "controller" => "user_sessions", "action" => "new");
+	$routes[] = array("type" => "static", "url" => "/logout", "controller" => "user_sessions", "action" => "destroy");
+	$routes[] = array("type" => "static", "url" => "/about", "controller" => "pages", "action" => "show", "params" => array("id" => 6));
 	
-	$this->static_url(array("url" => "/login", "controller" => "UserSessions", "action" => "new"));
-	$this->static_url(array("url" => "/logout", "controller" => "UserSessions", "action" => "destroy"));
+	$routes[] = array("type" => "resource", "resource" => "posts");
 	
-	$this->static_url(array("url" => "/about", "controller" => "Pages", "action" => "show", "params" => array("id" => 6)));
-	$this->resource("Categories");
-	$this->nested_resource(array("parent" => "Categories", "resource" => "Posts", "parent_params" => array("category_id" => ""), "params" => array()));
+	$routes[] = array("type" => "nested_resource", "parent" => "categories", "resource" => "posts", "parent_params" => array("category_id" => ""), "params" => array());
 	
 	  
 
