@@ -37,9 +37,9 @@
 	$get = $_GET;
 	$post = $_POST;
 	$cookie = $_COOKIE;
-	// Boot 'er up...
+	$request_method = $_SERVER['REQUEST_METHOD'];
 	
+	require_once(FRAMEWORK_CORE.'boot.php');
 	
-	require_once(FRAMEWORK_ROOT.DS."config".DS.'boot.php');
 	
 ?>
